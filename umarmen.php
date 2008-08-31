@@ -74,6 +74,17 @@ while(1) {
 						reply('Caught Exception in the ' . $module_to_load . ' module! ' . $e->getMessage());
 					}
 				}
+				if(isset($special_modules) && is_array($special_modules)) {
+					foreach($special_modules as $special_module) {
+						$module_text = file_get_contents('./modules/' . $special_module . '.php');
+						$module_text = substr($module_text, 5, strlen($module_text) - 7);
+						try {
+							eval($module_text);
+						} catch(Exception $e) {
+							reply('Caught Exception in the ' . $special_module . ' module! ' . $e->getMessage());
+						}
+					}
+				}
 				if($command == 'PING') {
 					$multibot->write($network_name, 'PONG :' . $message);
 				}

@@ -43,6 +43,20 @@ if(command('eval', true)) {
 		reply('No output returned');
 	}
 }
+if(command('adminadd', true)) {
+	$nick = $msg_args[1];
+	$host = $msg_args[2];
+	$admin_nicks[] = $nick;
+	$admin_hosts[] = $host;
+	reply($nick . ' has been added to the admin list');
+}
+if(command('admindel', true)) {
+	$nick = $msg_args[1];
+	$host = $msg_args[2];
+	unset($admin_nicks[$nick]);
+	unset($admin_hosts[$host]);
+	reply($nick . ' has been removed from the admin list');
+}
 if(command('memory')) {
 	reply('Currently using ' . memUsed() . ' of memory');
 }
@@ -59,4 +73,6 @@ Hooks::add('reload', 'admin');
 Hooks::add('eval', 'admin');
 Hooks::add('memory', 'admin');
 Hooks::add('uptime', 'admin');
+Hooks::add('adminadd', 'admin');
+Hooks::add('admindel', 'admin');
 ?>
