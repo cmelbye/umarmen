@@ -46,6 +46,11 @@ if(command('eval', true)) {
 if(command('memory')) {
 	reply('Currently using ' . memUsed() . ' of memory');
 }
+if(command('uptime')) {
+	$uptime = `uptime`;
+	$hostname = `hostname`;
+	reply('My host, ' . $hostname . ', currently has this uptime: ' . $uptime);
+}
 
 // Add the Hooks for this Module
 Hooks::add('join', 'admin');
@@ -53,4 +58,5 @@ Hooks::add('cycle', 'admin');
 Hooks::add('reload', 'admin');
 Hooks::add('eval', 'admin');
 Hooks::add('memory', 'admin');
+Hooks::add('uptime', 'admin');
 ?>

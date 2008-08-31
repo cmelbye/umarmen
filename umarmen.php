@@ -9,6 +9,7 @@ $multibot = new MultiBot($inital_server, $master_nick, $inital_channel);
 $datastore = new DataStore;
 $bot_number = 1;
 $inital_load = false;
+$inital_join = false;
 $doing_inital_load = false;
 srand((float) microtime() * 10000000);
 
@@ -36,6 +37,14 @@ while(1) {
 			if ( mb_strlen( $data ) > 0 ) {
 				$comchar = '^';
 				include('parser.php');
+				if(md5($inital_server . $master_nick) == $network_name && !$inital_join) {
+					if(isset($extra_channels) && is_array($extra_channels)) {
+						foreach($extra_channels as $channel) {
+							$multibot->join(md5($inital_server . $master_nick), $channel);
+						}
+					}
+					$inital_join = true;
+				}
 				$modules = array();
 				foreach(glob('modules/*.php') as $module_file) {
 					$module_name = substr($module_file, 8, -4);

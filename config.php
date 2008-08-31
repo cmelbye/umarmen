@@ -7,6 +7,7 @@
 $inital_server = 'irc.devnode.org';
 $master_nick = 'umarmen';
 $inital_channel = '#charlie';
+$extra_channels = array('#botters', '#mcgw', '#devnode', '#defocus');
 
 /**
  * These settings are for the Administrator users of the bot
