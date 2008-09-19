@@ -16,8 +16,8 @@ if($command == 'PRIVMSG' && stristr($message, ' is ')) {
 }
 
 $factoids = $datastore->getAll('factoid');
-if(array_key_exists($msg_args[0], $factoids) && !$just_saved_factoid) {
-	$factoid_value = $datastore->get('factoid', $msg_args[0]);
+if(array_key_exists($message, $factoids) && !$just_saved_factoid) {
+	$factoid_value = $datastore->get('factoid', $message);
 	if(stristr($factoid_value, '<reply>')) {
 		$factoid_value = substr($factoid_value, 7);
 		reply($factoid_value);
@@ -25,7 +25,7 @@ if(array_key_exists($msg_args[0], $factoids) && !$just_saved_factoid) {
 		$factoid_value = substr($factoid_value, 8);
 		reply(chr(1) . 'ACTION ' . $factoid_value . chr(1));
 	} else {
-		reply($msg_args[0] . ' is ' . $factoid_value);
+		reply($message . ' is ' . $factoid_value);
 	}
 }
 
