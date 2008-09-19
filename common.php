@@ -133,4 +133,31 @@ function memUsed(){
     $memory=mem_get_usage();
     return ByteSize($memory);
 }
+function parseFactoid($factoid_value) {
+	global $datastore;
+	
+	if(stristr($factoid_value, '<reply>')) {
+		$factoid_value = substr($factoid_value, 7);
+		return $factoid_value;
+	} else if(stristr($factoid_value, '<action>')) {
+		$factoid_value = substr($factoid_value, 8);
+		return chr(1) . 'ACTION ' . $factoid_value . chr(1);
+	} else if(stristr($factoid_value, '<alias>')) {
+		$alias_name = substr($factoid_value, 7);
+		try {
+			$factoid_value = $datastore->get('factoid', $alias_name, true);
+			if(stristr($factoid_value, '<alias>')) {
+				throw new Exception();
+			}
+			$factoid_value = parseFactoid($factoid_value);
+		} catch(DataStore_DoesNotExist_Exception $de) {
+			$factoid_value = 'Alias error, sorry.';
+		} catch(Exception $e) {
+			$factoid_value = 'Alias error, sorry.';
+		}
+		return $factoid_value;
+	} else {
+		return $message . ' is ' . $factoid_value;
+	}
+}
 ?>
