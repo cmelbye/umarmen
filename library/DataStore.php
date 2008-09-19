@@ -72,7 +72,7 @@ class DataStore {
 		return true;
 	}
 	
-	private function _getData($application) {
+	protected function _getData($application) {
 		$dataFile = './data/' . $application . '.dat';
 		if(!file_exists($dataFile)) {
 			$dataArray = array();
@@ -84,7 +84,7 @@ class DataStore {
 		return true;
 	}
 	
-	private function _flushData($application) {
+	protected function _flushData($application) {
 		$dataFile = './data/' . $application . '.dat';
 		$dataArray = serialize($this->data[$application]);
 		return file_put_contents($dataFile, $dataArray);
