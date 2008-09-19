@@ -1,7 +1,7 @@
 <?php
 
 $just_saved_factoid = false;
-if($command == 'PRIVMSG' && stristr($message, ' is ')) {
+if($command == 'PRIVMSG' && stristr($message, ' is ') && command()) {
 	$factoid_array = explode(' is ', $message, 2);
 	$factoid_name = $factoid_array[0];
 	$factoid_value = str_replace(array("\n", "\r"), '', $factoid_array[1]);

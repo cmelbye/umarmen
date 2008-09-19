@@ -30,8 +30,8 @@ function is_admin() {
 		return false;
 	}
 }
-function command($name, $admin = false, $master_only = false, $nick_address_only = false) {
-	global $msg_cmd, $network_name, $master_nick, $inital_server, $is_comchar;
+function command($name = null, $admin = false, $master_only = false, $nick_address_only = false) {
+	global $msg_cmd, $network_name, $master_nick, $inital_server, $is_comchar, $source_nick, $datastore;
 	
 	$master_uuid = md5($inital_server . $master_nick);
 	if($master_only && $network_name != $master_uuid) {
@@ -40,7 +40,7 @@ function command($name, $admin = false, $master_only = false, $nick_address_only
 		if($nick_address_only && $is_comchar) {
 			return false;
 		} else {
-			if($msg_cmd == $name) {
+			if($msg_cmd == $name || !$name) {
 				if($admin) {
 					if(is_admin()) {
 						return true;
@@ -48,7 +48,12 @@ function command($name, $admin = false, $master_only = false, $nick_address_only
 						return false;
 					}
 				}
-				return true;
+				$ignored = $datastore->getAll('ignore');
+				if(array_key_exists($source_nick, $ignored)) {
+					return false;
+				} else {
+					return true;
+				}
 			} else {
 				return false;
 			}
@@ -134,7 +139,7 @@ function memUsed(){
     return ByteSize($memory);
 }
 function parseFactoid($factoid_value) {
-	global $datastore;
+	global $datastore, $message;
 	
 	if(stristr($factoid_value, '<reply>')) {
 		$factoid_value = substr($factoid_value, 7);
