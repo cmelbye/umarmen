@@ -1,7 +1,7 @@
 <?php
 
 $just_saved_factoid = false;
-if($command == 'PRIVMSG' && stristr($message, ' is ') && command()) {
+if($command == 'PRIVMSG' && stristr($message, ' is ') && command() && $is_cmd) {
 	$factoid_array = explode(' is ', $message, 2);
 	$factoid_name = $factoid_array[0];
 	$factoid_value = str_replace(array("\n", "\r"), '', $factoid_array[1]);
@@ -16,7 +16,7 @@ if($command == 'PRIVMSG' && stristr($message, ' is ') && command()) {
 }
 
 $factoids = $datastore->getAll('factoid');
-if(array_key_exists($message, $factoids) && !$just_saved_factoid) {
+if(array_key_exists($message, $factoids) && !$just_saved_factoid && $is_cmd) {
 	$factoid_value = $datastore->get('factoid', $message);
 	$factoid_value = parseFactoid($factoid_value);
 	reply($factoid_value);
