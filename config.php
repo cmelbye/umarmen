@@ -4,9 +4,9 @@
  * These connection settings are for the master bot
  * Read the documentation for more information
  */
-$inital_server = 'irc.devnode.org';
+$inital_server = 'chat.freenode.net';
 $master_nick = 'mynewbot';
-$inital_channel = '#charlie';
+$inital_channel = '##charlie';
 $extra_channels = array('#botters');
 
 /**
@@ -30,6 +30,11 @@ $extra_connections = array();
 //	'server' => 'irc.freenode.net',
 //	'nickname' => 'umarmen',
 //	'channel' => '#OctarineParrot');
+
+/**
+ * Should the bot join channels if people invite it?
+ */
+$join_on_invite = true;
 
 /**
  * "Bad Words" module

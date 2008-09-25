@@ -91,6 +91,11 @@ while(1) {
 				if($command == 'ERROR') {
 					echo $data;
 				}
+				if($command == 'INVITE' && $join_on_invite) {
+					echo $data;
+					echo $message . "\n";
+					$multibot->join($network_name, $message);
+				}
 			}
 		} else {
 			$multibot->disconnect($network_name);
