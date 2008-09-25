@@ -19,7 +19,7 @@ class MultiBot {
 			$this->bots[$uuid] = array();
 			$this->bots[$uuid]['nickname'] = $nick;
 			Logger::log(Logger::_STATUS, "New bot has been created: " . $nick);
-			$this->bots[$uuid]['socket'] = fsockopen($server, 7000);
+			$this->bots[$uuid]['socket'] = fsockopen($server, 6667);
 			Logger::log(Logger::_STATUS, "Socket opened for bot '" . $nick . "'");
 			$this->bots[$uuid]['channel'] = $channel;
 			$this->bots[$uuid]['server'] = $server;
