@@ -40,7 +40,7 @@ class Hooks {
 	
 	public static function listHooks() {
 		$datastore = DataStore::get_instance();
-		return self::$hooks;
+		return $datastore->getAll("hook");
 	}
 	
 }

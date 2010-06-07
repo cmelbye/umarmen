@@ -65,6 +65,15 @@ if(command('uptime')) {
 	$hostname = `hostname`;
 	reply('My host, ' . $hostname . ', currently has this uptime: ' . $uptime);
 }
+if(command('hooks')) {
+  $hooks = Hooks::listHooks();
+  $resp = "";
+  foreach($hooks as $cmd => $mod) {
+    $resp .= "$cmd: $mod, ";
+  }
+  $resp = trim($resp, ', ');
+  reply("Registered hooks: $resp");
+}
 
 // Add the Hooks for this Module
 Hooks::add('join', 'admin');
@@ -75,4 +84,5 @@ Hooks::add('memory', 'admin');
 Hooks::add('uptime', 'admin');
 Hooks::add('adminadd', 'admin');
 Hooks::add('admindel', 'admin');
+Hooks::add('hooks', 'admin');
 ?>

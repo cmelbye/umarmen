@@ -1,8 +1,7 @@
 <?php
-if(command('ping')) {
-	reply('Pong!! :D');
+
+if (command( 'ping' )) {
+  reply('Pong!');
 }
 
-// Add the Hooks for this Module
 Hooks::add('ping', 'ping');
-?>

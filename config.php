@@ -5,15 +5,14 @@
  * Read the documentation for more information
  */
 $inital_server = 'chat.freenode.net';
-$master_nick = 'mynewbot';
+$master_nick = 'umarmen';
 $inital_channel = '##charlie';
-$extra_channels = array('#botters');
 
 /**
  * These settings are for the Administrator users of the bot
  */
-$admin_nicks = array('jdoe');
-$admin_hosts = array('jdoe.unaffiliated');
+$admin_nicks = array('chuck');
+$admin_hosts = array('yourwiki/staff/charlie');
 
 /**
  * Special Modules
@@ -46,5 +45,3 @@ $bad_words = array('insert', 'bad', 'words', 'here');
 // I know that this is fairly ugly, but it's the best way I found of doing it
 $bad_words_channel = '#badwords';
 $bad_words_server = 'some.irc.channel.net';
-
-?>
