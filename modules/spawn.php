@@ -29,11 +29,17 @@ if(command('kill', true)) {
 		reply('Usage: kill <servername> <botnick>');
 	} else {
 		if(count($msg_args) == 2) {
-			$nick = $msg_args[1];
-			$server = $multibot->bots[$network_name]['server'];
+		  if($msg_args[1] == "yourself") {
+		    $uuid = $network_name;
+		  } else {
+			  $nick = $msg_args[1];
+			  $server = $multibot->bots[$network_name]['server'];
+			  $uuid = md5($server . $nick);
+		  }
 		} else {
 			$server = $msg_args[1];
 			$nick = $msg_args[2];
+			$uuid = md5($server . $nick);
 		}
 		$uuid = md5($server . $nick);
 		try {
