@@ -1,7 +1,7 @@
 <?php
 if(command('join', true)) {
 	$channel = $msg_args[1];
-	$multibot->join($network_name, $channel, "Hey everyone! :D");
+	$multibot->join($network_name, $channel);
 }
 if(command('cycle', true)) {
 	$channel = $args[2];
