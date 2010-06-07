@@ -41,7 +41,6 @@ if(command('kill', true)) {
 			$nick = $msg_args[2];
 			$uuid = md5($server . $nick);
 		}
-		$uuid = md5($server . $nick);
 		try {
 			$multibot->disconnect($uuid);
 			reply('Killed ' . $nick . ' on ' . $server);
